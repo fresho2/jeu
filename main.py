@@ -23,7 +23,19 @@ def choisir_mot_alea(liste_de_mot):
         grace à la fonction randint de random"""
     index=random.randint(0,len(liste_de_mot)-1)
     return liste_de_mot[index]
+
+
+def initialiser_mot_part_decouv(mot_myst,car_subst="-"):
+    """ cette  foncion renvoie une liste contenant le mot mystere avec les caractères substiués"""
+    l=[]
+    for indice in range(len(mot_myst)):
+        if (indice == 0) or (indice == len(mot_myst)-1):
+            l.append(mot_myst[indice])
+        else:
+            l.append(car_subst)
+    return l
     
+        
 
 
 
@@ -32,7 +44,9 @@ def choisir_mot_alea(liste_de_mot):
 if __name__=="__main__":
     #programme principal
     l=importer_mots("mots2.txt")
+    mot=choisir_mot_alea(l)
     print(l)
-    print(choisir_mot_alea(l))
+    print(mot)
+    print(initialiser_mot_part_decouv(mot))
     
     
