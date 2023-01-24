@@ -52,7 +52,30 @@ def afficher_potence_texte(nb_erreur,nb_erreur_max):
             l_erreur[i-1]="!"
     for i in l_erreur: #créer une chaine de caractère à partir de la liste créer au dessus
         potence+=i    
-    print(potence)  
+    print(potence)
+
+
+
+#cette partie contient le déroulement de la partie humaine
+
+def demander_proposition(deja_dit):
+    """ renvoie une lettre saisie par l'utilisateur """
+    mot=input("Saisissez une lettre:")
+    while (mot.upper()<"A" or mot.upper()>"Z") or len(mot)!=1 or (mot.upper() in deja_dit):
+        mot=input("Saisissez une lettre:")
+    return mot.upper()
+
+def decouvrir_lettre(lettre,mot_myst,lmot_decouv):
+    """ renvoie un booleen si au moins un lettre est trouvée ou non et modifie la liste lmot_decouv si une lettre est decouverte"""
+    trouve=False
+    if lettre in mot_myst:
+        for i in range(len(mot_myst)):
+            if lettre==mot_myst[i] and lmot_decouv[i]=="-":
+                lmot_decouv[i]=mot_myst[i]
+                trouve=True
+    return trouve
+                
+    
 
 
 
