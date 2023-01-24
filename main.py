@@ -1,6 +1,11 @@
-#ceci est mon fichier principal
+#ceci est le fichier principal
 
-from mecanisme import * 
+from mecanisme import *
+from partie_humaine import *
+
+
+
+
 if __name__=="__main__":
     #programme principal
     l=importer_mots("mots2.txt")
@@ -17,4 +22,6 @@ if __name__=="__main__":
     afficher_potence_texte(6,8)
     afficher_potence_texte(7,8)
     afficher_potence_texte(8,8)
+    l=["M"]
+    print(demander_proposition(l))
     
