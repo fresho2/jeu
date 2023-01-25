@@ -68,9 +68,9 @@ def demander_proposition(deja_dit):
 def decouvrir_lettre(lettre,mot_myst,lmot_decouv):
     """ renvoie un booleen si au moins un lettre est trouvée ou non et modifie la liste lmot_decouv si une lettre est decouverte"""
     trouve=False
-    if lettre in mot_myst:
-        for i in range(len(mot_myst)):
-            if lettre==mot_myst[i] and lmot_decouv[i]=="-":
+    if lettre.upper() in mot_myst: #vérifie si la lettre est dans le mot mystère 
+        for i in range(len(mot_myst)):#ici i symbolise les indices
+            if lettre.upper()==mot_myst[i] and lmot_decouv[i]=="-":#si la lettre correspond a la lettre presente à l'indice i du mot mystere on le remplace
                 lmot_decouv[i]=mot_myst[i]
                 trouve=True
     return trouve
