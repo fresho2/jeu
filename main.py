@@ -32,7 +32,8 @@ def partie_humain(mot_myst,nb_erreur_max,car_subst="-"):
             print("vous avez déjà fait:",nb_erreur,"erreur(s)")
         if (nb_erreur>=1):  #verifie si le nombre d'erreur est superieur ou egale a un et affiche la potence si c'est le cas
             afficher_potence_texte(nb_erreur,nb_erreur_max)
-        print("Vous avez déjà proposé: ",deja_dit,"\n")
+        print("Vous avez déjà proposé: ",deja_dit)
+        print("______________________")
         mot=transforme(mot_part_decouv)
         if (mot==mot_myst):
             gagne=True
@@ -40,10 +41,14 @@ def partie_humain(mot_myst,nb_erreur_max,car_subst="-"):
             gagne=False
         
     if not gagne:
-        print("le mot mistère était",mot)
+        print("le mot mistère était",mot_myst)
     return gagne
 
-
+def partie_humaine_alea(nom_fichier,nb_erreur_max,car_subst="-"):
+    """choisit aleatoirement un mot dans une liste et fait appel à la fontion partie humaine """
+    l_de_mot=importer_mots(nom_fichier)#creer une liste de mots
+    mot_choisi=choisir_mot_alea(l_de_mot)#choisi un mot aleatoirement dans la liste de mote créer precedement
+    return partie_humain(mot_choisi,nb_erreur_max,car_subst)
 
 
 
@@ -56,8 +61,8 @@ if __name__=="__main__":
     #print(mot)
     #print(l2)
     #print(decouvrir_lettre("O",mot,l2))
-    partie_humain(mot, 5)
-    
+    #partie_humain(mot, 5)
+    partie_humaine_alea("mots.txt",8)
 
 
     #afficher_potence_texte(0,8)
