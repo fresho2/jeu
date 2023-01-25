@@ -60,9 +60,9 @@ def afficher_potence_texte(nb_erreur,nb_erreur_max):
 
 def demander_proposition(deja_dit):
     """ renvoie une lettre saisie par l'utilisateur """
-    mot=input("Saisissez une lettre:")
+    mot=input("Votre proposition: ")
     while (mot.upper()<"A" or mot.upper()>"Z") or len(mot)!=1 or (mot.upper() in deja_dit):
-        mot=input("Saisissez une lettre:")
+        mot=input("Donnez une autre proposition: ")
     return mot.upper()
 
 def decouvrir_lettre(lettre,mot_myst,lmot_decouv):

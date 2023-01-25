@@ -21,19 +21,22 @@ def partie_humain(mot_myst,nb_erreur_max,car_subst="-"):
     mot=transforme(mot_part_decouv)
     while not gagne and nb_erreur<nb_erreur_max :
         print("le mot mystère est:",mot)
-        lettre=input("Votre proposition: ") #demande a l'utilisateur de saisir une lettre
+        lettre=demander_proposition(deja_dit) #demande a l'utilisateur de saisir une lettre
         if not decouvrir_lettre(lettre,mot_myst,mot_part_decouv) and (lettre not in deja_dit):
             nb_erreur+=1
         if (lettre not in deja_dit): #ajoute une lettre a la liste de mot deja dit si celle ci n'a pas encore été dite
             deja_dit.append(lettre)
+        print ("______________________\n")
+        print("Vous avez déjà proposé: ",deja_dit,"\n")
+        
         if decouvrir_lettre(lettre,mot_myst,mot_part_decouv):#utilise le bouleen retourné et modifie la liste mot_part_decouv
             print("Lettre présente") #affiche lettre presente si la lettre fait partie du mot mystere
         else:
             print("vous avez déjà fait:",nb_erreur,"erreur(s)")
         if (nb_erreur>=1):  #verifie si le nombre d'erreur est superieur ou egale a un et affiche la potence si c'est le cas
+            print("vous avez ", end=" ")
             afficher_potence_texte(nb_erreur,nb_erreur_max)
-        print("Vous avez déjà proposé: ",deja_dit)
-        print("______________________")
+        print("______________________\n")
         mot=transforme(mot_part_decouv)
         if (mot==mot_myst):
             gagne=True
@@ -41,7 +44,9 @@ def partie_humain(mot_myst,nb_erreur_max,car_subst="-"):
             gagne=False
         
     if not gagne:
-        print("le mot mistère était",mot_myst)
+        print("le mot mistère était",mot_myst,end=".")
+    else:
+        print("Trouvé!! le mot mystère est",mot)
     return gagne
 
 def partie_humaine_alea(nom_fichier,nb_erreur_max,car_subst="-"):
@@ -62,7 +67,7 @@ if __name__=="__main__":
     #print(l2)
     #print(decouvrir_lettre("O",mot,l2))
     #partie_humain(mot, 5)
-    partie_humaine_alea("mots.txt",8)
+    print(partie_humaine_alea("mots.txt",8))
 
 
     #afficher_potence_texte(0,8)
