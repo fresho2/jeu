@@ -1,1 +1,7 @@
 __pycache__
+*.pdf
+*.toc
+*.synctex.gz
+*.aux
+*.log
+
