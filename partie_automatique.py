@@ -11,5 +11,26 @@ def fabrique_liste_alea():
     random.shuffle(a)
     return a
 
-print(fabrique_liste_alea())
-    
+def nb_occurence(mot,lettre):
+    """Prend en argument une chaine de caratere et une lettre et un caractere et renvoie le nombre d'occurence de cette lettre dans le mot"""    
+    occ=0
+    for i in mot:
+        if i == lettre:
+            occ+=1
+    return occ
+
+def dico_frequence(nom_fichier):
+    d={}
+    occurence=0
+    f=open(nom_fichier)
+    fichier_txt=f.read()
+    for lettre in fabrique_liste_alphabet() :
+        occurence=nb_occurence(fichier_txt.upper(),lettre)
+        if occurence>=1:
+            d[lettre]=occurence
+    return d
+    f.close()
+
+print(dico_frequence('mots2.txt'))
+
+            
