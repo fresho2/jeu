@@ -43,7 +43,17 @@ def lettre_la_plus_frequente(dico):
             clé=i
     return clé
 
-
+def fabrique_liste_freq(nom_fichier):
+    d1=dict(dico_frequence(nom_fichier))
+    l2=[]
+    a=len(d1)
+    b=0
+    while a>=0 :
+        b=lettre_la_plus_frequente(d1)
+        if b not in l2:
+            l2.append(b)
+        a+=1
+    return l2
 
         
     
