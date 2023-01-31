@@ -31,6 +31,22 @@ def dico_frequence(nom_fichier):
     return d
     f.close()
 
-print(dico_frequence('mots2.txt'))
+def lettre_la_plus_frequente(dico):
+    maxi=None
+    clé=0
+    for i in dico:
+        if maxi is None:
+            maxi=dico[i]
+            clé=i
+        elif maxi<=dico[i]:
+            maxi=dico[i]
+            clé=i
+    return clé
+
+
+
+        
+    
+
 
             
