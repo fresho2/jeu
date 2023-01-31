@@ -20,6 +20,9 @@ def nb_occurence(mot,lettre):
     return occ
 
 def dico_frequence(nom_fichier):
+    """rend en argument un nom de fichier nom_fichier et qui crée
+et renvoie un dictionnaire dont les clés sont les lettres majuscules et les valeurs correspondantes sont le
+nombre de fois où la clé apparaît dans le fichier.""" 
     d={}
     occurence=0
     f=open(nom_fichier)
@@ -32,31 +35,32 @@ def dico_frequence(nom_fichier):
     f.close()
 
 def lettre_la_plus_frequente(dico):
+    """ prend en argument un dictionnaire dico dont les clés
+sont des lettres majuscules et les valeurs des entiers (comme celui obtenu avec la fonction précédente).
+La fonction renvoie la lettre (c’est-à-dire, la clé) qui est associée au plus grand entier dans le diction-
+naire (correspond ici à la lettre la plus fréquente). """
     maxi=None
-    clé=0
-    for i in dico:
+    cle=None
+    for lettre in dico:
         if maxi is None:
-            maxi=dico[i]
-            clé=i
-        elif maxi<=dico[i]:
-            maxi=dico[i]
-            clé=i
-    return clé
+            maxi=dico[lettre]
+            cle=lettre
+        elif maxi<=dico[lettre]:
+            maxi=dico[lettre]
+            cle=lettre
+    return cle
+
 
 def fabrique_liste_freq(nom_fichier):
-    d1=dict(dico_frequence(nom_fichier))
-    l2=[]
-    a=len(d1)
-    b=0
-    while a>=0 :
-        b=lettre_la_plus_frequente(d1)
-        if b not in l2:
-            l2.append(b)
-        a+=1
-    return l2
-
-        
-    
+    """ prend en argument un nom de fichier nom_fichier et qui
+renvoie la liste des lettres majuscules, de la plus fréquente à la moins fréquente dans le fichier nom_fichier """
+    dico_copie=dict(dico_frequence(nom_fichier))
+    liste_freq=[]
+    for i in range(len(dico_copie)):
+        lettre=lettre_la_plus_frequente(dico_copie)
+        liste_freq.append(lettre)
+        del(dico_copie[lettre])
+    return liste_freq
 
 
             
