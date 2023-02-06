@@ -1,4 +1,5 @@
 from mecanisme import *
+from partie_humaine import transforme
 import random 
 def fabrique_liste_alphabet() :
     """la fonction n'a pas d'argument et renvoie une liste de lettre majuscule dans l'ordre alphabetique"""
@@ -62,5 +63,26 @@ renvoie la liste des lettres majuscules, de la plus fréquente à la moins fréq
         del(dico_copie[lettre])
     return liste_freq
 
-
-            
+def partie_auto(mot_myst,liste_lettre,affichage=True,pause=False):
+    """prend en argument un mot mystere une liste de lettre et deux option, d affichage et de pause et qui renvoie le nombre d'erreur faite part l ordinateur avant de trouver le resultat"""
+    i=0
+    erreur=0
+    deja_dit=[]
+    mot_trouvee=initialiser_mot_part_decouv(mot_myst)
+    mot=transforme(mot_trouvee)
+    while mot!=mot_myst:
+        deja_dit.append(liste_lettre[i])
+        if not decouvrir_lettre(liste_lettre[i],mot_myst,mot_trouvee):
+            erreur+=1
+        if affichage:
+            if pause:
+                input("Tapez sur n'importe quelle touche pour continuer")
+            print("le mot à découvrir est: ",mot)
+            if i>0:
+                print("L'ordinateur a deja fait : ",erreur)
+            elif i==0:
+                print("L'ordinateur n'a pas fait d'erreurs.")
+            print("L'ordinateur a déjà proposé " , deja_dit)
+        mot=transforme(mot_trouvee)
+        i+=1
+    return erreur

@@ -2,6 +2,7 @@
 
 from mecanisme import *
 from partie_humaine import *
+from partie_automatique import *
 
 
 
@@ -11,12 +12,15 @@ if __name__=="__main__":
     l=importer_mots("mots2.txt")
     mot=choisir_mot_alea(l)
     l2=initialiser_mot_part_decouv(mot)
+    l3=fabrique_liste_alphabet()
+    print(partie_auto(mot,l3,affichage=True,pause=True))
+     
     #print(l)
     #print(mot)
     #print(l2)
     #print(decouvrir_lettre("O",mot,l2))
     #partie_humain(mot, 5)
-    print(partie_humaine_alea("mots.txt",8))
+    #print(partie_humaine_alea("mots.txt",8))
 
 
     #afficher_potence_texte(0,8)
