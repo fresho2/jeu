@@ -70,19 +70,20 @@ def partie_auto(mot_myst,liste_lettre,affichage=True,pause=False):
     deja_dit=[]
     mot_trouvee=initialiser_mot_part_decouv(mot_myst)
     mot=transforme(mot_trouvee)
-    while mot!=mot_myst:
+    while mot!=mot_myst and i<26:
         deja_dit.append(liste_lettre[i])
         if not decouvrir_lettre(liste_lettre[i],mot_myst,mot_trouvee):
             erreur+=1
         if affichage:
             if pause:
-                input("Tapez sur n'importe quelle touche pour continuer")
-            print("le mot à découvrir est: ",mot)
+                input("\n Tapez sur entrée pour continuer")
+            print("\n le mot à découvrir est: ",mot)
             if i>0:
-                print("L'ordinateur a deja fait : ",erreur)
+                print("\n L'ordinateur a deja fait : ",erreur,"erreurs")
             elif i==0:
                 print("L'ordinateur n'a pas fait d'erreurs.")
-            print("L'ordinateur a déjà proposé " , deja_dit)
+            print("L'ordinateur a déjà proposé :" , deja_dit)
         mot=transforme(mot_trouvee)
         i+=1
+    print("le mot mystere était: ",mot_myst)
     return erreur

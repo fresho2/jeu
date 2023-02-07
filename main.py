@@ -8,6 +8,8 @@ from partie_automatique import *
 #choix du mot
 l=importer_mots("mots2.txt")
 mot=choisir_mot_alea(l)
+dico_lettre=dico_frequence("mots2.txt")
+nb_erreur_max=partie_auto(mot,lettre_la_plus_frequente(dico_lettre),False) #initialise le nombre d'erreur maximum en fonction de la frequence des lettres dans le fichier source
 
 #voici le menu qui sera afficher 
 print("Menu, veuillez choisir:")
@@ -37,16 +39,33 @@ while rep != "Q":
         print("1. L’ordinateur va les lettres dans l'ordre aphabétique.")
         print("2. L’ordinateur va choisir au hasard une lettre.")
         print("3. L’ordinateur va choisir en fonction de la fréquence des différentes lettres dans le fichier de mots.")
-        strategie=input(" ")
+        strategie=input("")
         while strategie not in "123":
             strategie=input("Choix invalide, recommencez :")
+        #affichage et pause
+            
+        affiche=input("voulez vous affichez le deroulement de la partie automatique ?(Oui[O]/Non[N])")
+        if affiche.upper() == 'O' or affiche.upper() == 'OUI':
+            affichage=True
+            pas=input("voulez vous faire un affichage pas à pas?(Oui[O]/Non[N])")
+            if pas.upper() == 'O' or pas.upper() == 'OUI':
+                pause=True
+            elif pas.upper() == 'N' or pas.upper() == 'NON':
+                pause=False
+            while pas.upper() != 'O' or pas.upper() != 'OUI' or pas.upper() != 'N' or pas.upper() != 'NON':
+                pas=input("Choix invalide, recommencez (Oui[O]/Non[N]): ")
+        elif affiche.upper() == 'N' or affiche.upper() == 'NON' :
+            affichage=False
+        while affiche.upper() != 'O' or affiche.upper() != 'OUI' or affiche.upper() != 'N' or affiche.upper() != 'NON':
+                affiche=input("Choix invalide, recommencez (Oui[O]/Non[N]): ")
+        #commencement des stratégies
+                
         if strategie == "1":
-            partie_auto(mot,fabrique_liste_alphabet(),affichage=True,pause=False)
+            partie_auto(mot,fabrique_liste_alphabet(),affichage,pause)
         elif strategie == "2":
-            partie_auto(mot,fabrique_liste_alea(),affichage=True,pause=False)
+            partie_auto(mot,fabrique_liste_alea(),affichage,pause)
         else:
-            dico_lettre=dico_frequence("mots2.txt")
-            partie_auto(mot,lettre_la_plus_frequente(dico_lettre),affichage=True,pause=False)
+            partie_auto(mot,fabrique_liste_freq(dico_lettre),affichage,pause)
     
             
     print("Menu, veuillez choisir:")
