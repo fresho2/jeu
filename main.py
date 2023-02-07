@@ -9,7 +9,7 @@ from partie_automatique import *
 l=importer_mots("mots2.txt")
 mot=choisir_mot_alea(l)
 dico_lettre=dico_frequence("mots2.txt")
-nb_erreur_max=partie_auto(mot,lettre_la_plus_frequente(dico_lettre),False) #initialise le nombre d'erreur maximum en fonction de la frequence des lettres dans le fichier source
+nb_erreur_max=partie_auto(mot,fabrique_liste_freq("mots2.txt"),False,False) #initialise le nombre d'erreur maximum en fonction de la frequence des lettres dans le fichier source
 
 #voici le menu qui sera afficher 
 print("Menu, veuillez choisir:")
@@ -19,20 +19,21 @@ print("2. Partie automatique (l'ordinateur joue à votre place)")
 print("Q. Quitter ")
 print("_______________________")
 rep=input("")
-while rep not in "12Q":
+while rep.upper() not in "12Q":
     rep=input("Choix invalide, recommencez :")
 
-while rep != "Q":
+while rep.upper() != "Q":
     if rep =="1":
-        nb_erreur_max=int(input("definissez votre nombre maximum d'erreur: "))
         defaut=input("Voulez vous une partie par défaut? (Oui[O]/Non[N])")
         if defaut.upper() == 'N' or defaut.upper() == 'NON':
             car_subst=input("Entrez un caractere de substitution : ")
+            nb_erreur_max=int(input("definissez votre nombre maximum d'erreur: "))
             partie_humain(mot,nb_erreur_max,car_subst)
         elif defaut.upper() == 'O' or defaut.upper() == 'OUI':
             partie_humain(mot,nb_erreur_max)
-        while defaut.upper() != 'O' or defaut.upper() != 'OUI' or defaut.upper() != 'N' or defaut.upper() != 'NON':
-            defaut=input("Choix invalide, recommencez (Oui[O]/Non[N]): ")
+        else:
+            while defaut.upper() != 'O' or defaut.upper() != 'OUI' or defaut.upper() != 'N' or defaut.upper() != 'NON':
+                defaut=input("Choix invalide, recommencez (Oui[O]/Non[N]): ")
     else:
         print("Veuillez choisir une stratégie:")
         print("_______________________")
@@ -52,12 +53,12 @@ while rep != "Q":
                 pause=True
             elif pas.upper() == 'N' or pas.upper() == 'NON':
                 pause=False
-            while pas.upper() != 'O' or pas.upper() != 'OUI' or pas.upper() != 'N' or pas.upper() != 'NON':
-                pas=input("Choix invalide, recommencez (Oui[O]/Non[N]): ")
+            else:
+                raise ValueError("Saisie incorrect")
         elif affiche.upper() == 'N' or affiche.upper() == 'NON' :
             affichage=False
-        while affiche.upper() != 'O' or affiche.upper() != 'OUI' or affiche.upper() != 'N' or affiche.upper() != 'NON':
-                affiche=input("Choix invalide, recommencez (Oui[O]/Non[N]): ")
+        else:
+            raise ValueError("Saisie incorrect")
         #commencement des stratégies
                 
         if strategie == "1":
@@ -65,9 +66,7 @@ while rep != "Q":
         elif strategie == "2":
             partie_auto(mot,fabrique_liste_alea(),affichage,pause)
         else:
-            partie_auto(mot,fabrique_liste_freq(dico_lettre),affichage,pause)
-    
-            
+            partie_auto(mot,fabrique_liste_freq("mots2.txt"),affichage,pause)         
     print("Menu, veuillez choisir:")
     print("_______________________")
     print("1. Partie humaine (vous essayerez de deviner vous même le mot)")
@@ -76,7 +75,7 @@ while rep != "Q":
     print("_______________________")
     rep=input("")
                 
-    while rep not in "12":
+    while rep.upper() not in "12Q":
         rep=input("Choix invalide, recommencez :")
 print("Au revoir")
 
